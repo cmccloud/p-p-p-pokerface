@@ -11,22 +11,19 @@
     (str s)))
 
 (defn pair? [hand]
-  (if (some (fn [x] (= x 2))
+  (or (some (fn [x] (= x 2))
             (vals (frequencies (map rank hand))))
-    true
-    false))
+      false))
 
 (defn three-of-a-kind? [hand]
-  (if (some (fn [x] (= x 3))
+  (or (some (fn [x] (= x 3))
             (vals (frequencies (map rank hand))))
-    true
-    false))
+      false))
 
 (defn four-of-a-kind? [hand]
-  (if (some (fn [x] (= x 4))
+  (or (some (fn [x] (= x 4))
             (vals (frequencies (map rank hand))))
-    true
-    false))
+      false))
 
 (defn flush? [hand]
   (= 1 (count (vals (frequencies (map suit hand))))))
@@ -40,7 +37,6 @@
     (and (= 3 (count counts))
          (= 2 (apply max counts)))))
 
-;TODO: FIX ME
 (defn straight? [hand]
   (let [[a b c d e] (sort (map rank hand))]
     (or (= [a b c d e]
